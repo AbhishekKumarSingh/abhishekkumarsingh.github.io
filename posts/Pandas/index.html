@@ -4,7 +4,7 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Pandas - Import Concepts -- Abhishek's blog</title>
+        <title>Pandas - Important Concepts -- Abhishek's blog</title>
         
         <link rel="stylesheet" href="../../fonts/Serif/cmun-serif.css" />
         <link rel="stylesheet" href="../../fonts/Serif-Slanted/cmun-serif-slanted.css" />
@@ -129,59 +129,59 @@
 orders <span class="op">=</span> pd.read_table(<span class="st">&quot;http://bit.ly/chiporders&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">orders.head()</code></pre></div>
 <div>
-<table border="1" class="dataframe">
-<thead>
-<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
-  &lt;th&gt;&lt;/th&gt;
-  &lt;th&gt;order_id&lt;/th&gt;
-  &lt;th&gt;quantity&lt;/th&gt;
-  &lt;th&gt;item_name&lt;/th&gt;
-  &lt;th&gt;choice_description&lt;/th&gt;
-  &lt;th&gt;item_price&lt;/th&gt;
-&lt;/tr&gt;</code></pre>
-</thead>
-<tbody>
-<pre><code>&lt;tr&gt;
-  &lt;th&gt;0&lt;/th&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;Chips and Fresh Tomato Salsa&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;$2.39&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;1&lt;/th&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;Izze&lt;/td&gt;
-  &lt;td&gt;[Clementine]&lt;/td&gt;
-  &lt;td&gt;$3.39&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;2&lt;/th&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;Nantucket Nectar&lt;/td&gt;
-  &lt;td&gt;[Apple]&lt;/td&gt;
-  &lt;td&gt;$3.39&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;3&lt;/th&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;Chips and Tomatillo-Green Chili Salsa&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;$2.39&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;4&lt;/th&gt;
-  &lt;td&gt;2&lt;/td&gt;
-  &lt;td&gt;2&lt;/td&gt;
-  &lt;td&gt;Chicken Bowl&lt;/td&gt;
-  &lt;td&gt;[Tomatillo-Red Chili Salsa (Hot), [Black Beans...&lt;/td&gt;
-  &lt;td&gt;$16.98&lt;/td&gt;
-&lt;/tr&gt;</code></pre>
-</tbody>
+<table class="table table-bordered table-hover table-striped" border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>order_id</th>
+      <th>quantity</th>
+      <th>item_name</th>
+      <th>choice_description</th>
+      <th>item_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Chips and Fresh Tomato Salsa</td>
+      <td>NaN</td>
+      <td>$2.39</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Izze</td>
+      <td>[Clementine]</td>
+      <td>$3.39</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Nantucket Nectar</td>
+      <td>[Apple]</td>
+      <td>$3.39</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Chips and Tomatillo-Green Chili Salsa</td>
+      <td>NaN</td>
+      <td>$2.39</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>2</td>
+      <td>Chicken Bowl</td>
+      <td>[Tomatillo-Red Chili Salsa (Hot), [Black Beans...</td>
+      <td>$16.98</td>
+    </tr>
+  </tbody>
 </table>
 </div>
 <p>read_table by default takes seperator as tab and assumes first row as header</p>
@@ -189,61 +189,62 @@ orders <span class="op">=</span> pd.read_table(<span class="st">&quot;http://bit
 users <span class="op">=</span> pd.read_table(<span class="st">&quot;http://bit.ly/movieusers&quot;</span>, sep<span class="op">=</span><span class="st">'|'</span>, header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>user_cols)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">users.head()</code></pre></div>
 <div>
-<table border="1" class="dataframe">
-<thead>
-<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
-  &lt;th&gt;&lt;/th&gt;
-  &lt;th&gt;user_id&lt;/th&gt;
-  &lt;th&gt;age&lt;/th&gt;
-  &lt;th&gt;gender&lt;/th&gt;
-  &lt;th&gt;occupation&lt;/th&gt;
-  &lt;th&gt;zip_code&lt;/th&gt;
-&lt;/tr&gt;</code></pre>
-</thead>
-<tbody>
-<pre><code>&lt;tr&gt;
-  &lt;th&gt;0&lt;/th&gt;
-  &lt;td&gt;1&lt;/td&gt;
-  &lt;td&gt;24&lt;/td&gt;
-  &lt;td&gt;M&lt;/td&gt;
-  &lt;td&gt;technician&lt;/td&gt;
-  &lt;td&gt;85711&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;1&lt;/th&gt;
-  &lt;td&gt;2&lt;/td&gt;
-  &lt;td&gt;53&lt;/td&gt;
-  &lt;td&gt;F&lt;/td&gt;
-  &lt;td&gt;other&lt;/td&gt;
-  &lt;td&gt;94043&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;2&lt;/th&gt;
-  &lt;td&gt;3&lt;/td&gt;
-  &lt;td&gt;23&lt;/td&gt;
-  &lt;td&gt;M&lt;/td&gt;
-  &lt;td&gt;writer&lt;/td&gt;
-  &lt;td&gt;32067&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;3&lt;/th&gt;
-  &lt;td&gt;4&lt;/td&gt;
-  &lt;td&gt;24&lt;/td&gt;
-  &lt;td&gt;M&lt;/td&gt;
-  &lt;td&gt;technician&lt;/td&gt;
-  &lt;td&gt;43537&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;4&lt;/th&gt;
-  &lt;td&gt;5&lt;/td&gt;
-  &lt;td&gt;33&lt;/td&gt;
-  &lt;td&gt;F&lt;/td&gt;
-  &lt;td&gt;other&lt;/td&gt;
-  &lt;td&gt;15213&lt;/td&gt;
-&lt;/tr&gt;</code></pre>
-</tbody>
+<table class="table table-bordered table-hover table-striped" border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>user_id</th>
+      <th>age</th>
+      <th>gender</th>
+      <th>occupation</th>
+      <th>zip_code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>24</td>
+      <td>M</td>
+      <td>technician</td>
+      <td>85711</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>53</td>
+      <td>F</td>
+      <td>other</td>
+      <td>94043</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>23</td>
+      <td>M</td>
+      <td>writer</td>
+      <td>32067</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>24</td>
+      <td>M</td>
+      <td>technician</td>
+      <td>43537</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>33</td>
+      <td>F</td>
+      <td>other</td>
+      <td>15213</td>
+    </tr>
+  </tbody>
 </table>
 </div>
+
 <p><strong>Tip </strong>: read_table method has lots of parameters that can be twicked. skiprows and skipfooter are quite useful in skipping some descriptions or comments in the data file.</p>
 <h2 id="how-do-i-select-a-panda-series-from-a-dataframe">How do I select a panda Series from a DataFrame</h2>
 <p>There are two basic objects in pandas that hold data.</p>
@@ -259,59 +260,59 @@ users <span class="op">=</span> pd.read_table(<span class="st">&quot;http://bit.
 ufo <span class="op">=</span> pd.read_csv(<span class="st">&quot;http://bit.ly/uforeports&quot;</span>)
 ufo.head()</code></pre></div>
 <div>
-<table border="1" class="dataframe">
-<thead>
-<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
-  &lt;th&gt;&lt;/th&gt;
-  &lt;th&gt;City&lt;/th&gt;
-  &lt;th&gt;Colors Reported&lt;/th&gt;
-  &lt;th&gt;Shape Reported&lt;/th&gt;
-  &lt;th&gt;State&lt;/th&gt;
-  &lt;th&gt;Time&lt;/th&gt;
-&lt;/tr&gt;</code></pre>
-</thead>
-<tbody>
-<pre><code>&lt;tr&gt;
-  &lt;th&gt;0&lt;/th&gt;
-  &lt;td&gt;Ithaca&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;TRIANGLE&lt;/td&gt;
-  &lt;td&gt;NY&lt;/td&gt;
-  &lt;td&gt;6/1/1930 22:00&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;1&lt;/th&gt;
-  &lt;td&gt;Willingboro&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;OTHER&lt;/td&gt;
-  &lt;td&gt;NJ&lt;/td&gt;
-  &lt;td&gt;6/30/1930 20:00&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;2&lt;/th&gt;
-  &lt;td&gt;Holyoke&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;OVAL&lt;/td&gt;
-  &lt;td&gt;CO&lt;/td&gt;
-  &lt;td&gt;2/15/1931 14:00&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;3&lt;/th&gt;
-  &lt;td&gt;Abilene&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;DISK&lt;/td&gt;
-  &lt;td&gt;KS&lt;/td&gt;
-  &lt;td&gt;6/1/1931 13:00&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;4&lt;/th&gt;
-  &lt;td&gt;New York Worlds Fair&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;LIGHT&lt;/td&gt;
-  &lt;td&gt;NY&lt;/td&gt;
-  &lt;td&gt;4/18/1933 19:00&lt;/td&gt;
-&lt;/tr&gt;</code></pre>
-</tbody>
+<table border="1" class="dataframe table table-bordered table-hover table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>City</th>
+      <th>Colors Reported</th>
+      <th>Shape Reported</th>
+      <th>State</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ithaca</td>
+      <td>NaN</td>
+      <td>TRIANGLE</td>
+      <td>NY</td>
+      <td>6/1/1930 22:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Willingboro</td>
+      <td>NaN</td>
+      <td>OTHER</td>
+      <td>NJ</td>
+      <td>6/30/1930 20:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Holyoke</td>
+      <td>NaN</td>
+      <td>OVAL</td>
+      <td>CO</td>
+      <td>2/15/1931 14:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abilene</td>
+      <td>NaN</td>
+      <td>DISK</td>
+      <td>KS</td>
+      <td>6/1/1931 13:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>New York Worlds Fair</td>
+      <td>NaN</td>
+      <td>LIGHT</td>
+      <td>NY</td>
+      <td>4/18/1933 19:00</td>
+    </tr>
+  </tbody>
 </table>
 </div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">type</span>(ufo)</code></pre></div>
@@ -450,67 +451,68 @@ Name: City, dtype: object</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ufo[<span class="st">'Location'</span>] <span class="op">=</span> ufo[<span class="st">'City'</span>] <span class="op">+</span> <span class="st">&quot;, &quot;</span> <span class="op">+</span> ufo[<span class="st">'State'</span>]
 ufo.head()</code></pre></div>
 <div>
-<table border="1" class="dataframe">
-<thead>
-<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
-  &lt;th&gt;&lt;/th&gt;
-  &lt;th&gt;City&lt;/th&gt;
-  &lt;th&gt;Colors Reported&lt;/th&gt;
-  &lt;th&gt;Shape Reported&lt;/th&gt;
-  &lt;th&gt;State&lt;/th&gt;
-  &lt;th&gt;Time&lt;/th&gt;
-  &lt;th&gt;Location&lt;/th&gt;
-&lt;/tr&gt;</code></pre>
-</thead>
-<tbody>
-<pre><code>&lt;tr&gt;
-  &lt;th&gt;0&lt;/th&gt;
-  &lt;td&gt;Ithaca&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;TRIANGLE&lt;/td&gt;
-  &lt;td&gt;NY&lt;/td&gt;
-  &lt;td&gt;6/1/1930 22:00&lt;/td&gt;
-  &lt;td&gt;Ithaca, NY&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;1&lt;/th&gt;
-  &lt;td&gt;Willingboro&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;OTHER&lt;/td&gt;
-  &lt;td&gt;NJ&lt;/td&gt;
-  &lt;td&gt;6/30/1930 20:00&lt;/td&gt;
-  &lt;td&gt;Willingboro, NJ&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;2&lt;/th&gt;
-  &lt;td&gt;Holyoke&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;OVAL&lt;/td&gt;
-  &lt;td&gt;CO&lt;/td&gt;
-  &lt;td&gt;2/15/1931 14:00&lt;/td&gt;
-  &lt;td&gt;Holyoke, CO&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;3&lt;/th&gt;
-  &lt;td&gt;Abilene&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;DISK&lt;/td&gt;
-  &lt;td&gt;KS&lt;/td&gt;
-  &lt;td&gt;6/1/1931 13:00&lt;/td&gt;
-  &lt;td&gt;Abilene, KS&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;4&lt;/th&gt;
-  &lt;td&gt;New York Worlds Fair&lt;/td&gt;
-  &lt;td&gt;NaN&lt;/td&gt;
-  &lt;td&gt;LIGHT&lt;/td&gt;
-  &lt;td&gt;NY&lt;/td&gt;
-  &lt;td&gt;4/18/1933 19:00&lt;/td&gt;
-  &lt;td&gt;New York Worlds Fair, NY&lt;/td&gt;
-&lt;/tr&gt;</code></pre>
-</tbody>
+<table border="1" class="dataframe table table-hover table-striped table-bordered">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>City</th>
+      <th>Colors Reported</th>
+      <th>Shape Reported</th>
+      <th>State</th>
+      <th>Time</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ithaca</td>
+      <td>NaN</td>
+      <td>TRIANGLE</td>
+      <td>NY</td>
+      <td>6/1/1930 22:00</td>
+      <td>Ithaca, NY</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Willingboro</td>
+      <td>NaN</td>
+      <td>OTHER</td>
+      <td>NJ</td>
+      <td>6/30/1930 20:00</td>
+      <td>Willingboro, NJ</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Holyoke</td>
+      <td>NaN</td>
+      <td>OVAL</td>
+      <td>CO</td>
+      <td>2/15/1931 14:00</td>
+      <td>Holyoke, CO</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Abilene</td>
+      <td>NaN</td>
+      <td>DISK</td>
+      <td>KS</td>
+      <td>6/1/1931 13:00</td>
+      <td>Abilene, KS</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>New York Worlds Fair</td>
+      <td>NaN</td>
+      <td>LIGHT</td>
+      <td>NY</td>
+      <td>4/18/1933 19:00</td>
+      <td>New York Worlds Fair, NY</td>
+    </tr>
+  </tbody>
 </table>
 </div>
+
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ufo[<span class="st">'City'</span>][<span class="dv">0</span>]</code></pre></div>
 <pre><code>'Ithaca'</code></pre>
 <p>Better practice is to use loc method</p>
@@ -523,120 +525,121 @@ ufo.head()</code></pre></div>
 movies <span class="op">=</span> pd.read_csv(<span class="st">&quot;http://bit.ly/imdbratings&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.head()</code></pre></div>
 <div>
-<table border="1" class="dataframe">
-<thead>
-<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
-  &lt;th&gt;&lt;/th&gt;
-  &lt;th&gt;star_rating&lt;/th&gt;
-  &lt;th&gt;title&lt;/th&gt;
-  &lt;th&gt;content_rating&lt;/th&gt;
-  &lt;th&gt;genre&lt;/th&gt;
-  &lt;th&gt;duration&lt;/th&gt;
-  &lt;th&gt;actors_list&lt;/th&gt;
-&lt;/tr&gt;</code></pre>
-</thead>
-<tbody>
-<pre><code>&lt;tr&gt;
-  &lt;th&gt;0&lt;/th&gt;
-  &lt;td&gt;9.3&lt;/td&gt;
-  &lt;td&gt;The Shawshank Redemption&lt;/td&gt;
-  &lt;td&gt;R&lt;/td&gt;
-  &lt;td&gt;Crime&lt;/td&gt;
-  &lt;td&gt;142&lt;/td&gt;
-  &lt;td&gt;[u'Tim Robbins', u'Morgan Freeman', u'Bob Gunt...&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;1&lt;/th&gt;
-  &lt;td&gt;9.2&lt;/td&gt;
-  &lt;td&gt;The Godfather&lt;/td&gt;
-  &lt;td&gt;R&lt;/td&gt;
-  &lt;td&gt;Crime&lt;/td&gt;
-  &lt;td&gt;175&lt;/td&gt;
-  &lt;td&gt;[u'Marlon Brando', u'Al Pacino', u'James Caan']&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;2&lt;/th&gt;
-  &lt;td&gt;9.1&lt;/td&gt;
-  &lt;td&gt;The Godfather: Part II&lt;/td&gt;
-  &lt;td&gt;R&lt;/td&gt;
-  &lt;td&gt;Crime&lt;/td&gt;
-  &lt;td&gt;200&lt;/td&gt;
-  &lt;td&gt;[u'Al Pacino', u'Robert De Niro', u'Robert Duv...&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;3&lt;/th&gt;
-  &lt;td&gt;9.0&lt;/td&gt;
-  &lt;td&gt;The Dark Knight&lt;/td&gt;
-  &lt;td&gt;PG-13&lt;/td&gt;
-  &lt;td&gt;Action&lt;/td&gt;
-  &lt;td&gt;152&lt;/td&gt;
-  &lt;td&gt;[u'Christian Bale', u'Heath Ledger', u'Aaron E...&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;4&lt;/th&gt;
-  &lt;td&gt;8.9&lt;/td&gt;
-  &lt;td&gt;Pulp Fiction&lt;/td&gt;
-  &lt;td&gt;R&lt;/td&gt;
-  &lt;td&gt;Crime&lt;/td&gt;
-  &lt;td&gt;154&lt;/td&gt;
-  &lt;td&gt;[u'John Travolta', u'Uma Thurman', u'Samuel L....&lt;/td&gt;
-&lt;/tr&gt;</code></pre>
-</tbody>
+<table border="1" class="dataframe table table-hover table-striped table-bordered">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>star_rating</th>
+      <th>title</th>
+      <th>content_rating</th>
+      <th>genre</th>
+      <th>duration</th>
+      <th>actors_list</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9.3</td>
+      <td>The Shawshank Redemption</td>
+      <td>R</td>
+      <td>Crime</td>
+      <td>142</td>
+      <td>[u'Tim Robbins', u'Morgan Freeman', u'Bob Gunt...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9.2</td>
+      <td>The Godfather</td>
+      <td>R</td>
+      <td>Crime</td>
+      <td>175</td>
+      <td>[u'Marlon Brando', u'Al Pacino', u'James Caan']</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9.1</td>
+      <td>The Godfather: Part II</td>
+      <td>R</td>
+      <td>Crime</td>
+      <td>200</td>
+      <td>[u'Al Pacino', u'Robert De Niro', u'Robert Duv...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.0</td>
+      <td>The Dark Knight</td>
+      <td>PG-13</td>
+      <td>Action</td>
+      <td>152</td>
+      <td>[u'Christian Bale', u'Heath Ledger', u'Aaron E...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8.9</td>
+      <td>Pulp Fiction</td>
+      <td>R</td>
+      <td>Crime</td>
+      <td>154</td>
+      <td>[u'John Travolta', u'Uma Thurman', u'Samuel L....</td>
+    </tr>
+  </tbody>
 </table>
 </div>
+
 <p><strong>Note</strong>: ‘describe’ method of DataFrame describe the all series which has numerical values</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.describe()</code></pre></div>
 <div>
-<table border="1" class="dataframe">
-<thead>
-<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
-  &lt;th&gt;&lt;/th&gt;
-  &lt;th&gt;star_rating&lt;/th&gt;
-  &lt;th&gt;duration&lt;/th&gt;
-&lt;/tr&gt;</code></pre>
-</thead>
-<tbody>
-<pre><code>&lt;tr&gt;
-  &lt;th&gt;count&lt;/th&gt;
-  &lt;td&gt;979.000000&lt;/td&gt;
-  &lt;td&gt;979.000000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;mean&lt;/th&gt;
-  &lt;td&gt;7.889785&lt;/td&gt;
-  &lt;td&gt;120.979571&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;std&lt;/th&gt;
-  &lt;td&gt;0.336069&lt;/td&gt;
-  &lt;td&gt;26.218010&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;min&lt;/th&gt;
-  &lt;td&gt;7.400000&lt;/td&gt;
-  &lt;td&gt;64.000000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;25%&lt;/th&gt;
-  &lt;td&gt;7.600000&lt;/td&gt;
-  &lt;td&gt;102.000000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;50%&lt;/th&gt;
-  &lt;td&gt;7.800000&lt;/td&gt;
-  &lt;td&gt;117.000000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;75%&lt;/th&gt;
-  &lt;td&gt;8.100000&lt;/td&gt;
-  &lt;td&gt;134.000000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;max&lt;/th&gt;
-  &lt;td&gt;9.300000&lt;/td&gt;
-  &lt;td&gt;242.000000&lt;/td&gt;
-&lt;/tr&gt;</code></pre>
-</tbody>
+<table border="1" class="dataframe table table-hover table-striped table-bordered">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>star_rating</th>
+      <th>duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>979.000000</td>
+      <td>979.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>7.889785</td>
+      <td>120.979571</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.336069</td>
+      <td>26.218010</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>7.400000</td>
+      <td>64.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>7.600000</td>
+      <td>102.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>7.800000</td>
+      <td>117.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>8.100000</td>
+      <td>134.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>9.300000</td>
+      <td>242.000000</td>
+    </tr>
+  </tbody>
 </table>
 </div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.shape</code></pre></div>
@@ -651,48 +654,49 @@ actors_list        object
 dtype: object</code></pre>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.describe(include<span class="op">=</span>[<span class="st">'object'</span>])</code></pre></div>
 <div>
-<table border="1" class="dataframe">
-<thead>
-<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
-  &lt;th&gt;&lt;/th&gt;
-  &lt;th&gt;title&lt;/th&gt;
-  &lt;th&gt;content_rating&lt;/th&gt;
-  &lt;th&gt;genre&lt;/th&gt;
-  &lt;th&gt;actors_list&lt;/th&gt;
-&lt;/tr&gt;</code></pre>
-</thead>
-<tbody>
-<pre><code>&lt;tr&gt;
-  &lt;th&gt;count&lt;/th&gt;
-  &lt;td&gt;979&lt;/td&gt;
-  &lt;td&gt;976&lt;/td&gt;
-  &lt;td&gt;979&lt;/td&gt;
-  &lt;td&gt;979&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;unique&lt;/th&gt;
-  &lt;td&gt;975&lt;/td&gt;
-  &lt;td&gt;12&lt;/td&gt;
-  &lt;td&gt;16&lt;/td&gt;
-  &lt;td&gt;969&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;top&lt;/th&gt;
-  &lt;td&gt;The Girl with the Dragon Tattoo&lt;/td&gt;
-  &lt;td&gt;R&lt;/td&gt;
-  &lt;td&gt;Drama&lt;/td&gt;
-  &lt;td&gt;[u'Daniel Radcliffe', u'Emma Watson', u'Rupert...&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-  &lt;th&gt;freq&lt;/th&gt;
-  &lt;td&gt;2&lt;/td&gt;
-  &lt;td&gt;460&lt;/td&gt;
-  &lt;td&gt;278&lt;/td&gt;
-  &lt;td&gt;6&lt;/td&gt;
-&lt;/tr&gt;</code></pre>
-</tbody>
+<table border="1" class="dataframe table table-hover table-border table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>content_rating</th>
+      <th>genre</th>
+      <th>actors_list</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>979</td>
+      <td>976</td>
+      <td>979</td>
+      <td>979</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>975</td>
+      <td>12</td>
+      <td>16</td>
+      <td>969</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>The Girl with the Dragon Tattoo</td>
+      <td>R</td>
+      <td>Drama</td>
+      <td>[u'Daniel Radcliffe', u'Emma Watson', u'Rupert...</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>2</td>
+      <td>460</td>
+      <td>278</td>
+      <td>6</td>
+    </tr>
+  </tbody>
 </table>
 </div>
+
 <p>Above, describe methods only describes the Series of types mentioned in include list</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>matplotlib inline
 movies.plot.scatter(<span class="st">'duration'</span>, <span class="st">'star_rating'</span>, c<span class="op">=</span><span class="st">'green'</span>)</code></pre></div>
