@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Pandas - Import Concepts -- Abhishek's blog</title>
+        
+        <link rel="stylesheet" href="../../fonts/Serif/cmun-serif.css" />
+        <link rel="stylesheet" href="../../fonts/Serif-Slanted/cmun-serif-slanted.css" />
+
+        <!--BOOTSTRAP-->
+        <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!--mobile first-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--removed html from url but still is html-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <!--font awesome-->
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+        <!--fonts: allan & cardo-->
+        <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+
+        <link href="../../css/sticky-footer-navbar.css" rel="stylesheet">
+
+        <link href="../../css/default.css" rel="stylesheet">
+
+        <link href="../../comments/inlineDisqussions.css" rel="stylesheet">
+
+        <!--Highlight-->
+        <link href="../../highlight/styles/github.css" rel="stylesheet">
+        
+        <link href="../../favicon.ico" rel="shortcut icon" />
+
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+        for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+        mixpanel.init("dc1ac55f121e696b2f8d54d338ec642c");</script><!-- end Mixpanel -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76984804-1', 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+
+<!--
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49811703-1', 'abhishekkumarsingh.github.io');
+  ga('require', 'linkid', 'linkid.js');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script> -->
+    </head>
+
+    <body>
+        <div id="wrap">
+            <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <div class="container">
+                    <!--Toggle header for mobile-->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand active" href="../../" style="font-size:20px;">Abhishek's blog</a>
+                    </div>
+                    <!--normal header-->
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../../archive.html"><span class="glyphicon glyphicon-pencil"></span>  Blog</a></li>
+                            <li><a href="../../about.html"><span class="glyphicon glyphicon-user"></span>  About</a></li>
+                            <li><a href="../../contact.html"><span class="glyphicon glyphicon-envelope"></span>  Contact</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+
+            
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1>Pandas - Import Concepts</h1>
+                            <div class="info">
+    <p style="font-family:CMSS; font-size:120%">Posted on April 26, 2016</p>
+    pandas, data manupulation, data analayis, data handling
+    <!--
+        by Abhishek Singh
+    -->
+</div>
+</br>
+
+<h2 id="python-pandas-qa-series"># Python Pandas QA Series</h2>
+<h2 id="what-is-pandas">What is pandas</h2>
+<p>Python data analysis library. Pandas is an open source, BSD-licensed library providing high-performance, easy-to-use data structures and data analysis tools for the Python programming language.</p>
+<p>A library that provides:</p>
+<ul>
+<li>data analysis</li>
+<li>data manipulation</li>
+<li>data visualization</li>
+</ul>
+<h2 id="how-do-i-read-tabular-data-into-pandas">How do I read tabular data into pandas</h2>
+<p>Tabular data: data in form of rows and columns; spread sheet, csv data</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pandas <span class="im">as</span> pd
+
+
+<span class="co"># pd.read_table('data/chipotle.tsv')</span>
+<span class="co"># can also read directly from the url</span>
+orders <span class="op">=</span> pd.read_table(<span class="st">&quot;http://bit.ly/chiporders&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">orders.head()</code></pre></div>
+<div>
+<table border="1" class="dataframe">
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;order_id&lt;/th&gt;
+  &lt;th&gt;quantity&lt;/th&gt;
+  &lt;th&gt;item_name&lt;/th&gt;
+  &lt;th&gt;choice_description&lt;/th&gt;
+  &lt;th&gt;item_price&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;0&lt;/th&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;Chips and Fresh Tomato Salsa&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;$2.39&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;1&lt;/th&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;Izze&lt;/td&gt;
+  &lt;td&gt;[Clementine]&lt;/td&gt;
+  &lt;td&gt;$3.39&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;2&lt;/th&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;Nantucket Nectar&lt;/td&gt;
+  &lt;td&gt;[Apple]&lt;/td&gt;
+  &lt;td&gt;$3.39&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;3&lt;/th&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;Chips and Tomatillo-Green Chili Salsa&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;$2.39&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;4&lt;/th&gt;
+  &lt;td&gt;2&lt;/td&gt;
+  &lt;td&gt;2&lt;/td&gt;
+  &lt;td&gt;Chicken Bowl&lt;/td&gt;
+  &lt;td&gt;[Tomatillo-Red Chili Salsa (Hot), [Black Beans...&lt;/td&gt;
+  &lt;td&gt;$16.98&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</div>
+<p>read_table by default takes seperator as tab and assumes first row as header</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">user_cols <span class="op">=</span> [<span class="st">'user_id'</span>, <span class="st">'age'</span>, <span class="st">'gender'</span>, <span class="st">'occupation'</span>, <span class="st">'zip_code'</span>]
+users <span class="op">=</span> pd.read_table(<span class="st">&quot;http://bit.ly/movieusers&quot;</span>, sep<span class="op">=</span><span class="st">'|'</span>, header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>user_cols)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">users.head()</code></pre></div>
+<div>
+<table border="1" class="dataframe">
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;user_id&lt;/th&gt;
+  &lt;th&gt;age&lt;/th&gt;
+  &lt;th&gt;gender&lt;/th&gt;
+  &lt;th&gt;occupation&lt;/th&gt;
+  &lt;th&gt;zip_code&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;0&lt;/th&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;24&lt;/td&gt;
+  &lt;td&gt;M&lt;/td&gt;
+  &lt;td&gt;technician&lt;/td&gt;
+  &lt;td&gt;85711&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;1&lt;/th&gt;
+  &lt;td&gt;2&lt;/td&gt;
+  &lt;td&gt;53&lt;/td&gt;
+  &lt;td&gt;F&lt;/td&gt;
+  &lt;td&gt;other&lt;/td&gt;
+  &lt;td&gt;94043&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;2&lt;/th&gt;
+  &lt;td&gt;3&lt;/td&gt;
+  &lt;td&gt;23&lt;/td&gt;
+  &lt;td&gt;M&lt;/td&gt;
+  &lt;td&gt;writer&lt;/td&gt;
+  &lt;td&gt;32067&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;3&lt;/th&gt;
+  &lt;td&gt;4&lt;/td&gt;
+  &lt;td&gt;24&lt;/td&gt;
+  &lt;td&gt;M&lt;/td&gt;
+  &lt;td&gt;technician&lt;/td&gt;
+  &lt;td&gt;43537&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;4&lt;/th&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;33&lt;/td&gt;
+  &lt;td&gt;F&lt;/td&gt;
+  &lt;td&gt;other&lt;/td&gt;
+  &lt;td&gt;15213&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</div>
+<p><strong>Tip </strong>: read_table method has lots of parameters that can be twicked. skiprows and skipfooter are quite useful in skipping some descriptions or comments in the data file.</p>
+<h2 id="how-do-i-select-a-panda-series-from-a-dataframe">How do I select a panda Series from a DataFrame</h2>
+<p>There are two basic objects in pandas that hold data.</p>
+<ul>
+<li>DataFrame</li>
+</ul>
+<p>DataFrame - It basically is a table of rows and columns</p>
+<p>Each of these columns is called a panda’s series</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pandas <span class="im">as</span> pd
+
+
+<span class="co"># pd.read_table(&quot;http://bit.ly/uforeports&quot;, sep=&quot;,&quot;)</span>
+ufo <span class="op">=</span> pd.read_csv(<span class="st">&quot;http://bit.ly/uforeports&quot;</span>)
+ufo.head()</code></pre></div>
+<div>
+<table border="1" class="dataframe">
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;City&lt;/th&gt;
+  &lt;th&gt;Colors Reported&lt;/th&gt;
+  &lt;th&gt;Shape Reported&lt;/th&gt;
+  &lt;th&gt;State&lt;/th&gt;
+  &lt;th&gt;Time&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;0&lt;/th&gt;
+  &lt;td&gt;Ithaca&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;TRIANGLE&lt;/td&gt;
+  &lt;td&gt;NY&lt;/td&gt;
+  &lt;td&gt;6/1/1930 22:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;1&lt;/th&gt;
+  &lt;td&gt;Willingboro&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;OTHER&lt;/td&gt;
+  &lt;td&gt;NJ&lt;/td&gt;
+  &lt;td&gt;6/30/1930 20:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;2&lt;/th&gt;
+  &lt;td&gt;Holyoke&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;OVAL&lt;/td&gt;
+  &lt;td&gt;CO&lt;/td&gt;
+  &lt;td&gt;2/15/1931 14:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;3&lt;/th&gt;
+  &lt;td&gt;Abilene&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;DISK&lt;/td&gt;
+  &lt;td&gt;KS&lt;/td&gt;
+  &lt;td&gt;6/1/1931 13:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;4&lt;/th&gt;
+  &lt;td&gt;New York Worlds Fair&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;LIGHT&lt;/td&gt;
+  &lt;td&gt;NY&lt;/td&gt;
+  &lt;td&gt;4/18/1933 19:00&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">type</span>(ufo)</code></pre></div>
+<pre><code>pandas.core.frame.DataFrame</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ufo[<span class="st">'City'</span>]</code></pre></div>
+<pre><code>0                      Ithaca
+1                 Willingboro
+2                     Holyoke
+3                     Abilene
+4        New York Worlds Fair
+5                 Valley City
+6                 Crater Lake
+7                        Alma
+8                     Eklutna
+9                     Hubbard
+10                    Fontana
+11                   Waterloo
+12                     Belton
+13                     Keokuk
+14                  Ludington
+15                Forest Home
+16                Los Angeles
+17                  Hapeville
+18                     Oneida
+19                 Bering Sea
+20                   Nebraska
+21                        NaN
+22                        NaN
+23                  Owensboro
+24                 Wilderness
+25                  San Diego
+26                 Wilderness
+27                     Clovis
+28                 Los Alamos
+29               Ft. Duschene
+                 ...         
+18211                 Holyoke
+18212                  Carson
+18213                Pasadena
+18214                  Austin
+18215                El Campo
+18216            Garden Grove
+18217           Berthoud Pass
+18218              Sisterdale
+18219            Garden Grove
+18220             Shasta Lake
+18221                Franklin
+18222          Albrightsville
+18223              Greenville
+18224                 Eufaula
+18225             Simi Valley
+18226           San Francisco
+18227           San Francisco
+18228              Kingsville
+18229                 Chicago
+18230             Pismo Beach
+18231             Pismo Beach
+18232                    Lodi
+18233               Anchorage
+18234                Capitola
+18235          Fountain Hills
+18236              Grant Park
+18237             Spirit Lake
+18238             Eagle River
+18239             Eagle River
+18240                    Ybor
+Name: City, dtype: object</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">type</span>(ufo[<span class="st">'City'</span>])</code></pre></div>
+<pre><code>pandas.core.series.Series</code></pre>
+<p>Another way of selecting series is to user dot notation (attribute selection)</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ufo.City</code></pre></div>
+<pre><code>0                      Ithaca
+1                 Willingboro
+2                     Holyoke
+3                     Abilene
+4        New York Worlds Fair
+5                 Valley City
+6                 Crater Lake
+7                        Alma
+8                     Eklutna
+9                     Hubbard
+10                    Fontana
+11                   Waterloo
+12                     Belton
+13                     Keokuk
+14                  Ludington
+15                Forest Home
+16                Los Angeles
+17                  Hapeville
+18                     Oneida
+19                 Bering Sea
+20                   Nebraska
+21                        NaN
+22                        NaN
+23                  Owensboro
+24                 Wilderness
+25                  San Diego
+26                 Wilderness
+27                     Clovis
+28                 Los Alamos
+29               Ft. Duschene
+                 ...         
+18211                 Holyoke
+18212                  Carson
+18213                Pasadena
+18214                  Austin
+18215                El Campo
+18216            Garden Grove
+18217           Berthoud Pass
+18218              Sisterdale
+18219            Garden Grove
+18220             Shasta Lake
+18221                Franklin
+18222          Albrightsville
+18223              Greenville
+18224                 Eufaula
+18225             Simi Valley
+18226           San Francisco
+18227           San Francisco
+18228              Kingsville
+18229                 Chicago
+18230             Pismo Beach
+18231             Pismo Beach
+18232                    Lodi
+18233               Anchorage
+18234                Capitola
+18235          Fountain Hills
+18236              Grant Park
+18237             Spirit Lake
+18238             Eagle River
+18239             Eagle River
+18240                    Ybor
+Name: City, dtype: object</code></pre>
+<p><strong>Note</strong>: Dot notation doesn’t work in case series name is space seperated or there is already a builtin type attribute, method with same name. Fall back to previous notation.</p>
+<h3 id="creating-a-new-series-in-a-dataframe">creating a new Series in a DataFrame</h3>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ufo[<span class="st">'Location'</span>] <span class="op">=</span> ufo[<span class="st">'City'</span>] <span class="op">+</span> <span class="st">&quot;, &quot;</span> <span class="op">+</span> ufo[<span class="st">'State'</span>]
+ufo.head()</code></pre></div>
+<div>
+<table border="1" class="dataframe">
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;City&lt;/th&gt;
+  &lt;th&gt;Colors Reported&lt;/th&gt;
+  &lt;th&gt;Shape Reported&lt;/th&gt;
+  &lt;th&gt;State&lt;/th&gt;
+  &lt;th&gt;Time&lt;/th&gt;
+  &lt;th&gt;Location&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;0&lt;/th&gt;
+  &lt;td&gt;Ithaca&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;TRIANGLE&lt;/td&gt;
+  &lt;td&gt;NY&lt;/td&gt;
+  &lt;td&gt;6/1/1930 22:00&lt;/td&gt;
+  &lt;td&gt;Ithaca, NY&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;1&lt;/th&gt;
+  &lt;td&gt;Willingboro&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;OTHER&lt;/td&gt;
+  &lt;td&gt;NJ&lt;/td&gt;
+  &lt;td&gt;6/30/1930 20:00&lt;/td&gt;
+  &lt;td&gt;Willingboro, NJ&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;2&lt;/th&gt;
+  &lt;td&gt;Holyoke&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;OVAL&lt;/td&gt;
+  &lt;td&gt;CO&lt;/td&gt;
+  &lt;td&gt;2/15/1931 14:00&lt;/td&gt;
+  &lt;td&gt;Holyoke, CO&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;3&lt;/th&gt;
+  &lt;td&gt;Abilene&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;DISK&lt;/td&gt;
+  &lt;td&gt;KS&lt;/td&gt;
+  &lt;td&gt;6/1/1931 13:00&lt;/td&gt;
+  &lt;td&gt;Abilene, KS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;4&lt;/th&gt;
+  &lt;td&gt;New York Worlds Fair&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;LIGHT&lt;/td&gt;
+  &lt;td&gt;NY&lt;/td&gt;
+  &lt;td&gt;4/18/1933 19:00&lt;/td&gt;
+  &lt;td&gt;New York Worlds Fair, NY&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ufo[<span class="st">'City'</span>][<span class="dv">0</span>]</code></pre></div>
+<pre><code>'Ithaca'</code></pre>
+<p>Better practice is to use loc method</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ufo.loc[<span class="dv">0</span>, <span class="st">'City'</span>]</code></pre></div>
+<pre><code>'Ithaca'</code></pre>
+<h2 id="why-do-some-pandas-commands-ends-with-parantheses-and-other-commands-dont">Why do some pandas commands ends with parantheses, and other commands don’t</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pandas <span class="im">as</span> pd
+
+
+movies <span class="op">=</span> pd.read_csv(<span class="st">&quot;http://bit.ly/imdbratings&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.head()</code></pre></div>
+<div>
+<table border="1" class="dataframe">
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;star_rating&lt;/th&gt;
+  &lt;th&gt;title&lt;/th&gt;
+  &lt;th&gt;content_rating&lt;/th&gt;
+  &lt;th&gt;genre&lt;/th&gt;
+  &lt;th&gt;duration&lt;/th&gt;
+  &lt;th&gt;actors_list&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;0&lt;/th&gt;
+  &lt;td&gt;9.3&lt;/td&gt;
+  &lt;td&gt;The Shawshank Redemption&lt;/td&gt;
+  &lt;td&gt;R&lt;/td&gt;
+  &lt;td&gt;Crime&lt;/td&gt;
+  &lt;td&gt;142&lt;/td&gt;
+  &lt;td&gt;[u'Tim Robbins', u'Morgan Freeman', u'Bob Gunt...&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;1&lt;/th&gt;
+  &lt;td&gt;9.2&lt;/td&gt;
+  &lt;td&gt;The Godfather&lt;/td&gt;
+  &lt;td&gt;R&lt;/td&gt;
+  &lt;td&gt;Crime&lt;/td&gt;
+  &lt;td&gt;175&lt;/td&gt;
+  &lt;td&gt;[u'Marlon Brando', u'Al Pacino', u'James Caan']&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;2&lt;/th&gt;
+  &lt;td&gt;9.1&lt;/td&gt;
+  &lt;td&gt;The Godfather: Part II&lt;/td&gt;
+  &lt;td&gt;R&lt;/td&gt;
+  &lt;td&gt;Crime&lt;/td&gt;
+  &lt;td&gt;200&lt;/td&gt;
+  &lt;td&gt;[u'Al Pacino', u'Robert De Niro', u'Robert Duv...&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;3&lt;/th&gt;
+  &lt;td&gt;9.0&lt;/td&gt;
+  &lt;td&gt;The Dark Knight&lt;/td&gt;
+  &lt;td&gt;PG-13&lt;/td&gt;
+  &lt;td&gt;Action&lt;/td&gt;
+  &lt;td&gt;152&lt;/td&gt;
+  &lt;td&gt;[u'Christian Bale', u'Heath Ledger', u'Aaron E...&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;4&lt;/th&gt;
+  &lt;td&gt;8.9&lt;/td&gt;
+  &lt;td&gt;Pulp Fiction&lt;/td&gt;
+  &lt;td&gt;R&lt;/td&gt;
+  &lt;td&gt;Crime&lt;/td&gt;
+  &lt;td&gt;154&lt;/td&gt;
+  &lt;td&gt;[u'John Travolta', u'Uma Thurman', u'Samuel L....&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</div>
+<p><strong>Note</strong>: ‘describe’ method of DataFrame describe the all series which has numerical values</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.describe()</code></pre></div>
+<div>
+<table border="1" class="dataframe">
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;star_rating&lt;/th&gt;
+  &lt;th&gt;duration&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;count&lt;/th&gt;
+  &lt;td&gt;979.000000&lt;/td&gt;
+  &lt;td&gt;979.000000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;mean&lt;/th&gt;
+  &lt;td&gt;7.889785&lt;/td&gt;
+  &lt;td&gt;120.979571&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;std&lt;/th&gt;
+  &lt;td&gt;0.336069&lt;/td&gt;
+  &lt;td&gt;26.218010&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;min&lt;/th&gt;
+  &lt;td&gt;7.400000&lt;/td&gt;
+  &lt;td&gt;64.000000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;25%&lt;/th&gt;
+  &lt;td&gt;7.600000&lt;/td&gt;
+  &lt;td&gt;102.000000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;50%&lt;/th&gt;
+  &lt;td&gt;7.800000&lt;/td&gt;
+  &lt;td&gt;117.000000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;75%&lt;/th&gt;
+  &lt;td&gt;8.100000&lt;/td&gt;
+  &lt;td&gt;134.000000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;max&lt;/th&gt;
+  &lt;td&gt;9.300000&lt;/td&gt;
+  &lt;td&gt;242.000000&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.shape</code></pre></div>
+<pre><code>(979, 6)</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.dtypes</code></pre></div>
+<pre><code>star_rating       float64
+title              object
+content_rating     object
+genre              object
+duration            int64
+actors_list        object
+dtype: object</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">movies.describe(include<span class="op">=</span>[<span class="st">'object'</span>])</code></pre></div>
+<div>
+<table border="1" class="dataframe">
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;title&lt;/th&gt;
+  &lt;th&gt;content_rating&lt;/th&gt;
+  &lt;th&gt;genre&lt;/th&gt;
+  &lt;th&gt;actors_list&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;count&lt;/th&gt;
+  &lt;td&gt;979&lt;/td&gt;
+  &lt;td&gt;976&lt;/td&gt;
+  &lt;td&gt;979&lt;/td&gt;
+  &lt;td&gt;979&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;unique&lt;/th&gt;
+  &lt;td&gt;975&lt;/td&gt;
+  &lt;td&gt;12&lt;/td&gt;
+  &lt;td&gt;16&lt;/td&gt;
+  &lt;td&gt;969&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;top&lt;/th&gt;
+  &lt;td&gt;The Girl with the Dragon Tattoo&lt;/td&gt;
+  &lt;td&gt;R&lt;/td&gt;
+  &lt;td&gt;Drama&lt;/td&gt;
+  &lt;td&gt;[u'Daniel Radcliffe', u'Emma Watson', u'Rupert...&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;freq&lt;/th&gt;
+  &lt;td&gt;2&lt;/td&gt;
+  &lt;td&gt;460&lt;/td&gt;
+  &lt;td&gt;278&lt;/td&gt;
+  &lt;td&gt;6&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
+</table>
+</div>
+<p>Above, describe methods only describes the Series of types mentioned in include list</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">%</span>matplotlib inline
+movies.plot.scatter(<span class="st">'duration'</span>, <span class="st">'star_rating'</span>, c<span class="op">=</span><span class="st">'green'</span>)</code></pre></div>
+<pre><code>&lt;matplotlib.axes.AxesSubplot at 0x7f29cbe5cbd0&gt;</code></pre>
+<figure>
+<img src="images/output_28_1.png" alt="png" /><figcaption>png</figcaption>
+</figure>
+
+<div id="disqus_thread"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+<script src="../../comments/inlineDisqussions.js"></script>
+<script src="../../js/disqus.js"></script>
+
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div id="footer">
+                <div class="container">
+                    Built by <a href="https://github.com/oinkina">Oinkina</a> with
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a> 
+                    using <a href="http://getbootstrap.com/">Bootstrap</a>, 
+                    <a href="http://www.mathjax.org/">MathJax</a>,
+                    <a href="http://disqus.com/">Disqus</a>,
+                    <a href="https://github.com/unconed/MathBox.js">MathBox.js</a>,
+                    <a href="http://highlightjs.org/">Highlight.js</a>, 
+                    and <a href="http://ignorethecode.net/blog/2010/04/20/footnotes/">Footnotes.js</a>.
+                </div>
+            </div>
+        </div>
+
+    <!-- jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../../highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../../js/footnotes.js"></script>
+
+    <script src="../../comments/inlineDisqussions.js"></script>
+    
+    <noscript>Enable JavaScript for footnotes, Disqus comments, and other cool stuff.</noscript>
+
+    </body>
+
+</html>
