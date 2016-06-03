@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Basics of Lua -- Abhishek's blog</title>
+        
+        <link rel="stylesheet" href="../../fonts/Serif/cmun-serif.css" />
+        <link rel="stylesheet" href="../../fonts/Serif-Slanted/cmun-serif-slanted.css" />
+
+        <!--BOOTSTRAP-->
+        <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!--mobile first-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--removed html from url but still is html-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <!--font awesome-->
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+        <!--fonts: allan & cardo-->
+        <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
+
+        <link href="../../css/sticky-footer-navbar.css" rel="stylesheet">
+
+        <link href="../../css/default.css" rel="stylesheet">
+
+        <link href="../../comments/inlineDisqussions.css" rel="stylesheet">
+
+        <!--Highlight-->
+        <link href="../../highlight/styles/github.css" rel="stylesheet">
+        
+        <link href="../../favicon.ico" rel="shortcut icon" />
+
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+        for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+        mixpanel.init("dc1ac55f121e696b2f8d54d338ec642c");</script><!-- end Mixpanel -->
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76984804-1', 'auto');
+  ga('require', 'linkid', 'linkid.js');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script>
+
+<!--
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49811703-1', 'abhishekkumarsingh.github.io');
+  ga('require', 'linkid', 'linkid.js');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+
+</script> -->
+    </head>
+
+    <body>
+        <div id="wrap">
+            <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+                <div class="container">
+                    <!--Toggle header for mobile-->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand active" href="../../" style="font-size:20px;">Abhishek's blog</a>
+                    </div>
+                    <!--normal header-->
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../../archive.html"><span class="glyphicon glyphicon-pencil"></span>  Blog</a></li>
+                            <li><a href="../../about.html"><span class="glyphicon glyphicon-user"></span>  About</a></li>
+                            <li><a href="../../contact.html"><span class="glyphicon glyphicon-envelope"></span>  Contact</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+
+            
+            <div id="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1>Basics of Lua</h1>
+                            <div class="info">
+    <p style="font-family:CMSS; font-size:120%">Posted on May 30, 2016</p>
+    Lua, lua basics
+    <!--
+        by Abhishek Singh
+    -->
+</div>
+</br>
+
+<h1 id="basics-of-lua">Basics of Lua</h1>
+<p>My motivation for writting this post is to give a quick introduction of Lua programming language to get which would help people in getting started with Torch quickyl.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Lua is a lightweight multi-paradigm programming language designed primarily for embedded systems and clients. It is cross-platform since it is written in ANSI C and has a relatively simple C API.</p>
+<h2 id="concepts">## Concepts</h2>
+<h3 id="comments-in-lua">Comments in Lua</h3>
+<p>one line comment is written in Lua by preffixing <code>--</code> to the comment. While multiline comment is enclosed in <code>[[ ]]</code>.</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- one line comment in Lua</span>
+<span class="st">[[ multiple line comment</span>
+<span class="st">in Lua ]]</span></code></pre></div>
+<h3 id="data-structures-in-lua">Data structures in Lua</h3>
+<p>Lua has only two data structure <code>doubles</code> and <code>tables</code>. Table is a structure that allows us to store multiple values and can be used as a dictionary as well as a list. It’s also used for creating new type of objects in Lua.</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- doubles</span>
+var <span class="ot">=</span> <span class="dv">5</span> <span class="co">-- variables are global by default</span>
+<span class="kw">local</span> var2 <span class="ot">=</span> <span class="dv">5</span> <span class="co">-- this is a local variable</span>
+
+<span class="co">-- tables</span>
+dict <span class="ot">=</span> <span class="ot">{</span>a <span class="ot">=</span> <span class="dv">1</span><span class="ot">,</span> b <span class="ot">=</span> <span class="dv">2</span><span class="ot">,</span> c <span class="ot">=</span> <span class="dv">3</span><span class="ot">,</span> d <span class="ot">=</span> <span class="dv">4</span><span class="ot">}</span> <span class="co">-- a simple dictionary</span>
+list <span class="ot">=</span> <span class="ot">{</span><span class="dv">1</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">3</span><span class="ot">}</span> <span class="co">-- a simple list</span>
+
+<span class="co">-- two ways to display the same value</span>
+<span class="fu">print</span><span class="ot">(</span>dict<span class="ot">.</span>a<span class="ot">)</span>
+<span class="fu">print</span><span class="ot">(</span>list<span class="ot">[</span><span class="dv">1</span><span class="ot">])</span> <span class="co">-- IMPORTANT: note that the lists are 1-indexed!</span></code></pre></div>
+<h3 id="control-flow-statements-in-lua">Control flow statements in Lua</h3>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- use of for loop and control statements</span>
+<span class="kw">for</span> i<span class="ot">=</span><span class="dv">1</span><span class="ot">,</span><span class="dv">10</span> <span class="kw">do</span>
+  <span class="kw">if</span> i <span class="ot">==</span> <span class="dv">1</span> <span class="kw">then</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;uno&quot;</span><span class="ot">)</span>
+  <span class="kw">elseif</span> i <span class="ot">==</span> <span class="dv">2</span> <span class="kw">then</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;dos&quot;</span><span class="ot">)</span>
+  <span class="kw">else</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="st">&quot;something else&quot;</span><span class="ot">)</span>
+  <span class="kw">end</span>
+<span class="kw">end</span>
+
+val <span class="ot">=</span> <span class="dv">1</span>
+<span class="kw">while</span> val <span class="ot">&lt;</span> <span class="dv">10</span> <span class="kw">do</span>
+  val <span class="ot">=</span> val <span class="ot">*</span> <span class="dv">2</span>
+<span class="kw">end</span></code></pre></div>
+<h3 id="functions-in-lua">Functions in Lua</h3>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">function</span> add<span class="ot">(</span>a<span class="ot">,</span> b<span class="ot">)</span>
+  <span class="kw">return</span> a <span class="ot">+</span> b
+<span class="kw">end</span>
+
+<span class="fu">print</span><span class="ot">(</span>add<span class="ot">(</span><span class="dv">7</span><span class="ot">,</span> <span class="dv">3</span><span class="ot">))</span> <span class="co">-- prints 10</span></code></pre></div>
+<p>There is an interesting thing. In Lua we can define functions within tables.</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua">tab <span class="ot">=</span> <span class="ot">{</span><span class="dv">1</span><span class="ot">,</span> <span class="dv">2</span><span class="ot">,</span> <span class="dv">3</span><span class="ot">}</span>
+<span class="kw">function</span> tab<span class="ot">.</span>sum <span class="ot">()</span>
+  c <span class="ot">=</span> <span class="dv">0</span>
+  <span class="kw">for</span> i<span class="ot">=</span><span class="dv">1</span><span class="ot">,#</span>tab <span class="kw">do</span>
+    c <span class="ot">=</span> c <span class="ot">+</span> tab<span class="ot">[</span>i<span class="ot">]</span>
+  <span class="kw">end</span>
+  <span class="kw">return</span> c
+<span class="kw">end</span>
+
+<span class="fu">print</span><span class="ot">(</span>tab:sum<span class="ot">())</span> <span class="co">-- displays 6 (the colon is used for calling methods)</span></code></pre></div>
+<h3 id="inputoutput-in-lua">Input/Output in Lua</h3>
+<p>I/O on file:</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua">myfile <span class="ot">=</span> <span class="fu">io.open</span><span class="ot">(</span><span class="st">&quot;doc.txt&quot;</span><span class="ot">,</span> <span class="st">&quot;w&quot;</span><span class="ot">)</span>
+<span class="kw">for</span> line <span class="kw">in</span> <span class="fu">io.lines</span><span class="ot">(</span><span class="st">&quot;~/input.txt&quot;</span><span class="ot">)</span> <span class="kw">do</span>
+  myfile:<span class="fu">write</span><span class="ot">(</span>line <span class="ot">+</span> <span class="st">&quot;</span><span class="ot">\n</span><span class="st">&quot;</span><span class="ot">)</span> <span class="co">-- write on file</span>
+<span class="kw">end</span></code></pre></div>
+<p>I/O on stdin and stdout:</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua">input_val <span class="ot">=</span> <span class="fu">io.read</span><span class="ot">()</span>
+<span class="fu">io.write</span><span class="ot">(</span><span class="st">&quot;You entered: &quot;</span> <span class="ot">..</span> input_val <span class="ot">+</span> <span class="st">&quot;</span><span class="ot">\n</span><span class="st">&quot;</span><span class="ot">)</span>
+<span class="co">-- alternatively: print (&quot;You entered: &quot; .. input_val)</span></code></pre></div>
+<p>Hope this provides a good base for using torch.</p>
+
+<div id="disqus_thread"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+<script src="../../comments/inlineDisqussions.js"></script>
+<script src="../../js/disqus.js"></script>
+
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div id="footer">
+                <div class="container">
+                    Built by <a href="https://github.com/oinkina">Oinkina</a> with
+                    <a href="http://jaspervdj.be/hakyll">Hakyll</a> 
+                    using <a href="http://getbootstrap.com/">Bootstrap</a>, 
+                    <a href="http://www.mathjax.org/">MathJax</a>,
+                    <a href="http://disqus.com/">Disqus</a>,
+                    <a href="https://github.com/unconed/MathBox.js">MathBox.js</a>,
+                    <a href="http://highlightjs.org/">Highlight.js</a>, 
+                    and <a href="http://ignorethecode.net/blog/2010/04/20/footnotes/">Footnotes.js</a>.
+                </div>
+            </div>
+        </div>
+
+    <!-- jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../../highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="../../js/footnotes.js"></script>
+
+    <script src="../../comments/inlineDisqussions.js"></script>
+    
+    <noscript>Enable JavaScript for footnotes, Disqus comments, and other cool stuff.</noscript>
+
+    </body>
+
+</html>
