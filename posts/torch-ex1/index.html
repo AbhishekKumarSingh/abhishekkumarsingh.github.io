@@ -4,7 +4,7 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Getting Started With Torch -- Abhishek's blog</title>
+        <title>A toy example - a binary logistic module using torch -- Abhishek's blog</title>
         
         <link rel="stylesheet" href="../../fonts/Serif/cmun-serif.css" />
         <link rel="stylesheet" href="../../fonts/Serif-Slanted/cmun-serif-slanted.css" />
@@ -100,42 +100,70 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
-                            <h1>Getting Started With Torch</h1>
+                            <h1>A toy example - a binary logistic module using torch</h1>
                             <div class="info">
-    <p style="font-family:CMSS; font-size:120%">Posted on June  1, 2016</p>
-    lua, torch
+    <p style="font-family:CMSS; font-size:120%">Posted on June  5, 2016</p>
+    lua, torch, logistic regression, toy example
     <!--
         by Abhishek Singh
     -->
 </div>
 </br>
 
-<h2 id="introduction">Introduction</h2>
-<p>It is a scientific computing framework with wide support for machine learning algorithms that uses GPUs first. It is easy to use, fast scripting language, LuaJIT and an underlying C/CUDA implementation.</p>
-<p>some core features available are:</p>
+<p>In this post, I will be demostrating how to build a simple binary logistic regression module with 2 input units and 1 output using torch. I will be using <code>nn</code> package for this purpose.</p>
+<p>Creation for neural network is done in following steps:</p>
 <ul>
-<li>a powerful N-dimensional array</li>
-<li>lots of routines for indexing, slicing, transposing, …</li>
-<li>amazing interface to C, via LuaJIT</li>
-<li>linear algebra routines</li>
-<li>neural network, and energy-based models</li>
-<li>numeric optimization routines</li>
-<li>Fast and efficient GPU support</li>
-<li>Embeddable, with ports to iOS, Android and FPGA backends</li>
+<li>Model creation</li>
+<li>Defining criterion</li>
+<li>Data handling</li>
+<li>Training</li>
 </ul>
-<p>Torch comes with a large ecosystem of <a href="https://github.com/torch/torch7/wiki/Cheatsheet">community-driven packages</a> in machine learning, computer vision, signal processing, parallel processing, image, video, audio and networking among others, and builds on top of the Lua community.</p>
-<h2 id="installing-torch">Installing Torch</h2>
-<p>In Mac OSX, Ubuntu 12+ it can be installed in the home folder in ~/torch by following commands</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># in a terminal, run the commands WITHOUT sudo</span>
-<span class="kw">git</span> clone https://github.com/torch/distro.git ~/torch --recursive
-<span class="kw">cd</span> ~/torch<span class="kw">;</span> <span class="kw">bash</span> install-deps<span class="kw">;</span>
-<span class="kw">./install.sh</span></code></pre></div>
-<p>To uninstall torch, simply run the command:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rm</span> -rf ~/torch</code></pre></div>
-<p>Invoke your shell (bash/zsh) by calling appropriate shell</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">bash</span></code></pre></div>
-<p>Type <code>th</code> to invoke torch terminal</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">th</span></code></pre></div>
+<h3 id="model-creation">Model creation</h3>
+<p>Let’s being with the model creation. The function to be modelled is as follows:</p>
+<p>$ y = (Wx + b)$</p>
+<p>where <code>sigmoid (logistic function)</code> is defined as:</p>
+<p>$ (z) = $</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="fu">require</span> <span class="st">'nn'</span>
+
+module <span class="ot">=</span> nn<span class="ot">.</span>Sequential<span class="ot">()</span>
+module:add<span class="ot">(</span>nn<span class="ot">.</span>Linear<span class="ot">(</span><span class="dv">2</span><span class="ot">,</span> <span class="dv">1</span><span class="ot">))</span>
+module:add<span class="ot">(</span>nn<span class="ot">.</span>sigmoid<span class="ot">())</span></code></pre></div>
+<p><code>simple feed-forward network</code>: It takes the input, feeds it through several layers one after the other, and then finally gives the output.</p>
+<p>Such a network container is nn.Sequential which feeds the input through several layers. In this case we have a network with 1 hidden layer.</p>
+<h3 id="defining-criterion">Defining criterion</h3>
+<p>Here criterion is a binary cross-entropy Criterion (which expects a 0 or 1 valued targets):</p>
+<p>BCE loss function is defined as:</p>
+<p>$ -_i [t_i (y_i) + (1 - t_i)(1 - y_i)]$</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua">criterion <span class="ot">=</span> nn<span class="ot">.</span>BCECriterion<span class="ot">()</span></code></pre></div>
+<h3 id="data">Data</h3>
+<p>As this is just a toy example, I am using some random generated data. This dummy dataset contains 10 samples:</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua">inputs <span class="ot">=</span> torch<span class="ot">.</span>Tensor<span class="ot">(</span><span class="dv">10</span><span class="ot">,</span> <span class="dv">2</span><span class="ot">)</span>:uniform<span class="ot">(-</span><span class="dv">1</span><span class="ot">,</span> <span class="dv">1</span><span class="ot">)</span>
+targets <span class="ot">=</span> torch<span class="ot">.</span>Tensor<span class="ot">(</span><span class="dv">10</span><span class="ot">)</span>:<span class="fu">random</span><span class="ot">(</span><span class="dv">0</span><span class="ot">,</span> <span class="dv">1</span><span class="ot">)</span></code></pre></div>
+<h3 id="training">Training</h3>
+<p>Function for one epoch of stochastic gradient descent (SGD)</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="fu">require</span> <span class="st">'dpnn'</span>
+
+<span class="kw">function</span> trainEpoc<span class="ot">(</span>module<span class="ot">,</span> criterion<span class="ot">,</span> inputs<span class="ot">,</span> targets<span class="ot">)</span>
+    <span class="kw">for</span> i<span class="ot">=</span><span class="dv">1</span><span class="ot">,</span> inputs:size<span class="ot">(</span><span class="dv">1</span><span class="ot">)</span> <span class="kw">do</span>
+        <span class="kw">local</span> idx <span class="ot">=</span> <span class="fu">math.random</span><span class="ot">(</span><span class="dv">1</span><span class="ot">,</span> input:size<span class="ot">(</span><span class="dv">1</span><span class="ot">))</span>
+        <span class="kw">local</span> input<span class="ot">,</span> target <span class="ot">=</span> inputs<span class="ot">[</span>idx<span class="ot">],</span> targets:narrow<span class="ot">(</span><span class="dv">1</span><span class="ot">,</span> idx<span class="ot">,</span> <span class="dv">1</span><span class="ot">)</span>
+        <span class="co">--forward</span>
+        <span class="kw">local</span> output <span class="ot">=</span> module:forward<span class="ot">(</span>input<span class="ot">)</span>
+        <span class="kw">local</span> loss <span class="ot">=</span> criterion:forward<span class="ot">(</span>output<span class="ot">,</span> target<span class="ot">)</span>
+        <span class="co">--backward</span>
+        <span class="kw">local</span> gradOutput <span class="ot">=</span> criterion:backward<span class="ot">(</span>output<span class="ot">,</span> target<span class="ot">)</span>
+        module:zeroGradParameters<span class="ot">()</span>
+        <span class="kw">local</span> gradInput <span class="ot">=</span> module:backward<span class="ot">(</span>input<span class="ot">,</span> gradOutput<span class="ot">)</span>
+        <span class="co">--update</span>
+        module:updateGradParameters<span class="ot">(</span><span class="dv">0.9</span><span class="ot">)</span> <span class="co">-- momentum (dpnn)</span>
+        module:updateParameters<span class="ot">(</span><span class="dv">0.1</span><span class="ot">)</span> <span class="co">-- W = W - 0.1*dL/dW</span>
+    <span class="kw">end</span>
+<span class="kw">end</span></code></pre></div>
+<p>Let’s do 100 epochs to train the module</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">for</span> i<span class="ot">=</span><span class="dv">1</span><span class="ot">,</span> <span class="dv">100</span> <span class="kw">do</span>
+    trainEpoc<span class="ot">(</span>module<span class="ot">,</span> criterion<span class="ot">,</span> inputs<span class="ot">,</span> targets<span class="ot">)</span>
+<span class="kw">end</span></code></pre></div>
+<p>Here, I have taken 0.1 as learning rate.</p>
 
 <div id="disqus_thread"></div>
 
