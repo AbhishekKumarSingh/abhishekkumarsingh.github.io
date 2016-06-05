@@ -120,9 +120,9 @@
 </ul>
 <h3 id="model-creation">Model creation</h3>
 <p>Let’s being with the model creation. The function to be modelled is as follows:</p>
-<p>$ y = (Wx + b)$</p>
+<p><span class="math display">\[y = \sigma(Wx + b)\]</span></p>
 <p>where <code>sigmoid (logistic function)</code> is defined as:</p>
-<p>$ (z) = $</p>
+<p><span class="math display">\[ \sigma(z) = \frac{1}{1 - \exp^{-z}} \]</span></p>
 <div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="fu">require</span> <span class="st">'nn'</span>
 
 module <span class="ot">=</span> nn<span class="ot">.</span>Sequential<span class="ot">()</span>
@@ -133,7 +133,7 @@ module:add<span class="ot">(</span>nn<span class="ot">.</span>sigmoid<span class
 <h3 id="defining-criterion">Defining criterion</h3>
 <p>Here criterion is a binary cross-entropy Criterion (which expects a 0 or 1 valued targets):</p>
 <p>BCE loss function is defined as:</p>
-<p>$ -_i [t_i (y_i) + (1 - t_i)(1 - y_i)]$</p>
+<p><span class="math display">\[ -\sum_i [t_i \log(y_i) + (1 - t_i)\log(1 - y_i)] \]</span></p>
 <div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua">criterion <span class="ot">=</span> nn<span class="ot">.</span>BCECriterion<span class="ot">()</span></code></pre></div>
 <h3 id="data">Data</h3>
 <p>As this is just a toy example, I am using some random generated data. This dummy dataset contains 10 samples:</p>
