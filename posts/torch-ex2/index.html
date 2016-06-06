@@ -4,7 +4,7 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Getting Started With Torch -- Abhishek's blog</title>
+        <title>A toy example - Word2Vec using torch -- Abhishek's blog</title>
         
         <link rel="stylesheet" href="../../fonts/Serif/cmun-serif.css" />
         <link rel="stylesheet" href="../../fonts/Serif-Slanted/cmun-serif-slanted.css" />
@@ -100,48 +100,77 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
-                            <h1>Getting Started With Torch</h1>
+                            <h1>A toy example - Word2Vec using torch</h1>
                             <div class="info">
-    <p style="font-family:CMSS; font-size:120%">Posted on June  1, 2016</p>
-    lua, torch
+    <p style="font-family:CMSS; font-size:120%">Posted on June  6, 2016</p>
+    lua, torch, word2Vec, toy example
     <!--
         by Abhishek Singh
     -->
 </div>
 </br>
 
-<h2 id="introduction">Introduction</h2>
-<p>It is a scientific computing framework with wide support for machine learning algorithms that uses GPUs first. It is easy to use, fast scripting language, LuaJIT and an underlying C/CUDA implementation.</p>
-<p>some core features available are:</p>
-<ul>
-<li>a powerful N-dimensional array</li>
-<li>lots of routines for indexing, slicing, transposing, …</li>
-<li>amazing interface to C, via LuaJIT</li>
-<li>linear algebra routines</li>
-<li>neural network, and energy-based models</li>
-<li>numeric optimization routines</li>
-<li>Fast and efficient GPU support</li>
-<li>Embeddable, with ports to iOS, Android and FPGA backends</li>
-</ul>
-<p>Torch comes with a large ecosystem of <a href="https://github.com/torch/torch7/wiki/Cheatsheet">community-driven packages</a> in machine learning, computer vision, signal processing, parallel processing, image, video, audio and networking among others, and builds on top of the Lua community.</p>
-<h2 id="installing-torch">Installing Torch</h2>
-<p>In Mac OSX, Ubuntu 12+ it can be installed in the home folder in ~/torch by following commands</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># in a terminal, run the commands WITHOUT sudo</span>
-<span class="kw">git</span> clone https://github.com/torch/distro.git ~/torch --recursive
-<span class="kw">cd</span> ~/torch<span class="kw">;</span> <span class="kw">bash</span> install-deps<span class="kw">;</span>
-<span class="kw">./install.sh</span></code></pre></div>
-<p>To uninstall torch, simply run the command:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rm</span> -rf ~/torch</code></pre></div>
-<p>Invoke your shell (bash/zsh) by calling appropriate shell</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">bash</span></code></pre></div>
-<p>Type <code>th</code> to invoke torch terminal</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">th</span></code></pre></div>
-<h2 id="example-codes">Example codes</h2>
-<p>Following are some toy codes to learn torch.</p>
-<ul>
-<li><a href="http://abhishekkumarsingh.github.io/posts/torch-ex1/">A toy example - a binary logistic module using torch</a></li>
-<li><a href="http://abhishekkumarsingh.github.io/posts/torch-ex2">A toy example - Word2Vec using Torch</a></li>
-</ul>
+<p>Word2Vec has gain a lot of popularity. This beauty of this model is, word vectors are positioned in the vector space such that words that share common contexts in the corpus are located in close proximity to one another in the space.</p>
+<p>Basically, in continuous bag of words (CBOW) model the idea is to predict the center word given the context word. Below is a toy code for word2vec model for learnign word embeddings.</p>
+<div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="co">-- A toy code demonstrating word2vec (CBOW)</span>
+<span class="fu">require</span> <span class="st">'torch'</span>
+<span class="fu">require</span> <span class="st">'nn'</span>
+
+
+<span class="co">--[[</span>
+<span class="co">    Dataset:</span>
+<span class="co">    I like cricket</span>
+<span class="co">    I play flute</span>
+<span class="co">--]]--</span>
+
+<span class="co">-- construct vocabulary map</span>
+vocab <span class="ot">=</span> <span class="ot">{}</span>
+vocab<span class="ot">[</span><span class="st">'I'</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">1</span>
+vocab<span class="ot">[</span><span class="st">'like'</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">2</span>
+vocab<span class="ot">[</span><span class="st">'cricket'</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">3</span>
+vocab<span class="ot">[</span><span class="st">'play'</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">4</span>
+vocab<span class="ot">[</span><span class="st">'flute'</span><span class="ot">]</span> <span class="ot">=</span> <span class="dv">5</span>
+
+<span class="co">-- make dataset</span>
+dataset <span class="ot">=</span> <span class="ot">{}</span>
+input1 <span class="ot">=</span> torch<span class="ot">.</span>Tensor<span class="ot">{</span>vocab<span class="ot">[</span><span class="st">'I'</span><span class="ot">],</span> vocab<span class="ot">[</span><span class="st">'cricket'</span><span class="ot">]}</span>
+output1 <span class="ot">=</span> torch<span class="ot">.</span>Tensor<span class="ot">{</span>vocab<span class="ot">[</span><span class="st">'like'</span><span class="ot">]}</span>
+input2 <span class="ot">=</span> torch<span class="ot">.</span>Tensor<span class="ot">{</span>vocab<span class="ot">[</span><span class="st">'I'</span><span class="ot">],</span> vocab<span class="ot">[</span><span class="st">'flute'</span><span class="ot">]}</span>
+output2 <span class="ot">=</span> torch<span class="ot">.</span>Tensor<span class="ot">{</span>vocab<span class="ot">[</span><span class="st">'play'</span><span class="ot">]}</span>
+dataset<span class="ot">[</span><span class="dv">1</span><span class="ot">]</span> <span class="ot">=</span> <span class="ot">{</span>input1<span class="ot">,</span> output1<span class="ot">}</span>
+dataset<span class="ot">[</span><span class="dv">2</span><span class="ot">]</span> <span class="ot">=</span> <span class="ot">{</span>input2<span class="ot">,</span> output2<span class="ot">}</span>
+<span class="kw">function</span> dataset:size<span class="ot">()</span> <span class="kw">return</span> <span class="dv">2</span> <span class="kw">end</span> <span class="co">-- defines size of dataset which is a requirement</span>
+
+<span class="co">-- define constants</span>
+vocabSize <span class="ot">=</span> <span class="dv">5</span>
+wordEmbeddingSize <span class="ot">=</span> <span class="dv">10</span>
+learningRate <span class="ot">=</span> <span class="dv">0.01</span>
+nepocs <span class="ot">=</span> <span class="dv">10</span>
+
+<span class="co">-- model creation</span>
+model <span class="ot">=</span> nn<span class="ot">.</span>Sequential<span class="ot">()</span>
+model:add<span class="ot">(</span>nn<span class="ot">.</span>LookupTable<span class="ot">(</span>vocabSize<span class="ot">,</span> wordEmbeddingSize<span class="ot">))</span>
+model:add<span class="ot">(</span>nn<span class="ot">.</span>Mean<span class="ot">())</span> <span class="co">-- averaging words in the input; loses the word order</span>
+model:add<span class="ot">(</span>nn<span class="ot">.</span>Linear<span class="ot">(</span>wordEmbeddingSize<span class="ot">,</span> vocabSize<span class="ot">))</span> <span class="co">-- project to |v| size representation</span>
+model:add<span class="ot">(</span>nn<span class="ot">.</span>LogSoftMax<span class="ot">())</span> <span class="co">-- probability of output over input; represents probability distribution</span>
+<span class="fu">print</span><span class="ot">(</span>model<span class="ot">)</span>
+
+<span class="co">-- define criterion function (loss function)</span>
+criterion <span class="ot">=</span> nn<span class="ot">.</span>ClassNLLCriterion<span class="ot">()</span>
+
+<span class="co">-- define trainer</span>
+trainer <span class="ot">=</span> nn<span class="ot">.</span>StochasticGradient<span class="ot">(</span>model<span class="ot">,</span> criterion<span class="ot">)</span>
+trainer<span class="ot">.</span>learningRate <span class="ot">=</span> learningRate
+trainer<span class="ot">.</span>maxIteration <span class="ot">=</span> nepocs
+
+<span class="fu">print</span><span class="ot">(</span><span class="st">&quot;Word Lookup before learning&quot;</span><span class="ot">)</span>
+<span class="fu">print</span><span class="ot">(</span>model<span class="ot">.</span>modules<span class="ot">[</span><span class="dv">1</span><span class="ot">].</span>weight<span class="ot">)</span>
+
+<span class="co">-- train model</span>
+trainer:train<span class="ot">(</span>dataset<span class="ot">)</span>
+
+<span class="co">-- Get word embeddings</span>
+<span class="fu">print</span><span class="ot">(</span>model<span class="ot">.</span>modules<span class="ot">[</span><span class="dv">1</span><span class="ot">].</span>weight<span class="ot">)</span></code></pre></div>
 
 <div id="disqus_thread"></div>
 
